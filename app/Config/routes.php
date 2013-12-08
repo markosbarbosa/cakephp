@@ -31,6 +31,7 @@
  * ...and connect the rest of 'Pages' controller's URLs.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+	Router::connect('/marcos_app/index', array('controller' => 'marcos_app', 'action' => 'index', 'plugin'=>'marcos'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on

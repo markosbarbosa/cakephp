@@ -13,13 +13,20 @@ class UsuariosController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Paginator', 'Session');
 
-/**
- * index method
- *
- * @return void
- */
+
+	function beforeFilter() {
+		// $this->Auth->allow(array('add', 'index'));
+		$this->Auth->allow(array('add', 'index', 'delete'));
+	}
+
+
+	/**
+	 * index method
+	 *
+	 * @return void
+	 */
 	public function index() {
 		// $this->autoRender = false;
 
@@ -27,6 +34,23 @@ class UsuariosController extends AppController {
 		$this->set('usuarios', $this->Paginator->paginate());
 
 	}
+
+	public function login() {
+        if($this->request->is('post')) {
+            if($this->Auth->login()) {
+                $this->redirect($this->Auth->redirect());
+            } else {
+                $this->Session->setFlash(__('Login e/ou senha incorretos'));
+            }
+        }
+    }
+
+    public function logout() {
+    	$url = $this->Auth->logout();
+        $this->redirect($url);
+    }
+    
+
 
 /**
  * view method
@@ -50,6 +74,10 @@ class UsuariosController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
+
+			$senha = $this->request->data['Usuario']['senha'];
+			$this->request->data['Usuario']['senha'] = $this->Auth->password($senha);
+
 			$this->Usuario->create();
 			if ($this->Usuario->save($this->request->data)) {
 				$this->Session->setFlash(__('The usuario has been saved.'));

@@ -18,7 +18,7 @@ class Usuario extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'nome';
+	// public $displayField = 'nome';
 
 /**
  * Validation rules
@@ -39,6 +39,16 @@ class Usuario extends AppModel {
 		'email' => array(
 			'email' => array(
 				'rule' => array('email'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'senha' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

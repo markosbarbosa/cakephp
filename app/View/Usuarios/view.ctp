@@ -16,6 +16,11 @@
 			<?php echo h($usuario['Usuario']['email']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Senha'); ?></dt>
+		<dd>
+			<?php echo h($usuario['Usuario']['senha']); ?>
+			&nbsp;
+		</dd>
 	</dl>
 </div>
 <div class="actions">

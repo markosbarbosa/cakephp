@@ -2,8 +2,6 @@
 /**
  * The ControllerTask handles creating and updating controller files.
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -112,6 +110,7 @@ class ControllerTask extends BakeTask {
 			$admin = $this->Project->getPrefix();
 		}
 
+		$controllersCreated = 0;
 		foreach ($this->__tables as $table) {
 			$model = $this->_modelName($table);
 			$controller = $this->_controllerName($model);
@@ -125,7 +124,12 @@ class ControllerTask extends BakeTask {
 				if ($this->bake($controller, $actions) && $unitTestExists) {
 					$this->bakeTest($controller);
 				}
+				$controllersCreated++;
 			}
+		}
+
+		if (!$controllersCreated) {
+			$this->out(__d('cake_console', 'No Controllers were baked, Models need to exist before Controllers can be baked.'));
 		}
 	}
 

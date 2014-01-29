@@ -30,12 +30,20 @@ App::uses('AppController', 'Controller');
  */
 class PagesController extends AppController {
 
-/**
- * This controller does not use a model
- *
- * @var array
- */
+	/**
+	 * This controller does not use a model
+	 *
+	 * @var array
+	 */
 	public $uses = array();
+
+	/**
+	 * Autoriza acesso para todas as páginas públicas
+	 */
+	function beforeFilter() {
+		$this->Auth->allow();
+	}
+
 
 /**
  * Displays a view

@@ -16,12 +16,6 @@ class UsuariosController extends AppController {
 	public $components = array('Paginator', 'Session');
 
 
-	function beforeFilter() {
-		// $this->Auth->allow(array('add', 'index'));
-		$this->Auth->allow(array('add', 'index', 'delete'));
-	}
-
-
 	/**
 	 * index method
 	 *
